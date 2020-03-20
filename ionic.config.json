@@ -1,5 +1,7 @@
 {
   "name": "portfolioApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
