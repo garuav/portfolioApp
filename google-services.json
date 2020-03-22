@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "677458351094",
+    "firebase_url": "https://portfolio-3881c.firebaseio.com",
+    "project_id": "portfolio-3881c",
+    "storage_bucket": "portfolio-3881c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677458351094:android:00d6c190aae61f0880edd7",
+        "android_client_info": {
+          "package_name": "com.portfolio_gaurav.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677458351094-qtiap8unshvb685tr5sou6nq3ajfm7q6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMK4tItClUbjgmaVu6INwzulBKcVxwUT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677458351094-qtiap8unshvb685tr5sou6nq3ajfm7q6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
