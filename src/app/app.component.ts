@@ -4,7 +4,6 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
-import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +29,6 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private firebase: Firebase,
-    private faio: FingerprintAIO
   ) {
     this.initializeApp();
   }
@@ -40,7 +38,6 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.initFirebase();
-      this.initFingerprint();
     });
   }
 
@@ -70,13 +67,5 @@ export class AppComponent implements OnInit {
       .onTokenRefresh()
       .subscribe((token: string) => console.log(`Got a new token ${token}`));
   }
-  initFingerprint() {
-    this.faio
-      .show({
-        disableBackup: true,
-        description: 'Some biometric description',
-      })
-      .then((result: any) => console.log(result))
-      .catch((error: any) => console.log(error));
-  }
+ 
 }
