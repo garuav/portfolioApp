@@ -62,7 +62,6 @@ export class AppComponent implements OnInit {
   }
   initFirebase() {
     firebase.initializeApp(firebaseConfig);
-    
     this.firebaseApp
       .getToken()
       .then(token => {
