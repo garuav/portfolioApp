@@ -6,3 +6,9 @@ Cordova reference documentation:
 
 - Icons: https://cordova.apache.org/docs/en/latest/config_ref/images.html
 - Splash Screens: https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-splashscreen/
+
+
+
+<!-- for adding gradle path  -->
+export GRADLE_HOME=/Users/gauravbhatt/gradle-6.0
+export PATH=$GRADLE_HOME/bin:$PATH 

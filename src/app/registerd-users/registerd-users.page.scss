@@ -1,0 +1,36 @@
+.users-data {
+    ion-card-title{
+        text-align: center;
+    }
+    ion-card-content{
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+        .img-block{
+            img {
+                width: 5rem;
+                border-radius: 50%;
+            }
+        }
+        .current-user-data {
+            display: flex;
+            align-items: center;
+            flex-flow: column;
+        }
+        .user-name {
+            h5 {
+                font-size: 1.2rem;
+                text-transform: capitalize;
+                font-weight: 500;
+            }
+        }
+        .user-email {
+            padding: 0 1rem;
+            h6 {
+                font-size: 1rem;
+                font-weight: 400;
+
+            }
+        }
+    }
+}

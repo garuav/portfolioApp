@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Registered Users</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="users-data">
+    <ion-card *ngFor="let user of usersList;">
+      <ion-card-content>
+        <div class="img-block">
+          <img [src]="user?.photoURL" />
+        </div>
+        <div class="current-user-data">
+          <div class="user-name">
+            <h5>
+              {{user?.displayName}}
+            </h5>
+          </div>
+          <div class="user-email">
+            <h6>
+              {{user?.email}}
+            </h6>
+          </div>
+        </div>
+        
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

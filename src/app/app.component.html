@@ -25,7 +25,12 @@
               ></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
+            
           </ion-menu-toggle>
+          <ion-item>
+            <ion-label>Theme</ion-label>
+            <ion-toggle [(ngModel)]="selectedTheme" (ionChange)="changeTheme($event)"></ion-toggle>
+          </ion-item>
         </ion-list>
 
         <!--  <ion-list id="labels-list">
