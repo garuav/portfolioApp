@@ -1,0 +1,44 @@
+.chat-page{
+    .chat-list {
+        // height: 100%;
+        .chat-txt-box{
+            padding: 1rem;
+            border: 2px solid #649c9c;
+            margin: .5rem;
+            border-radius: 10px;
+            display: flex;
+            &.own-msg {
+                justify-content: flex-start;
+                border: 2px solid #c47d61;
+            }
+            &.admin-msg{
+                justify-content: flex-end;
+                border: 2px solid #65a197;
+            }
+        }
+       
+    }
+}
+ion-footer {
+    .message-box{
+        width: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: .5rem;
+        textarea{
+            width: 95%;
+            border: 2px solid #cdcdcd;
+            border-radius: 5px;
+            min-height: 5rem;
+            resize: none;
+            font-size: 1.5rem;
+        }
+    ion-icon{
+        position: absolute;
+        right: 01rem;
+        font-size: 2rem;
+    }
+    }
+}

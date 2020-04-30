@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -7,7 +7,10 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import * as firebase from 'firebase';
 import { firebaseConfig } from 'src/common/common.constants';
 import { CommonService } from 'src/common/common.service';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Router, NavigationExtras } from '@angular/router';
 @Component({
+  providers:[LocalNotifications],
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
@@ -15,6 +18,10 @@ import { CommonService } from 'src/common/common.service';
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
   private selectedTheme: boolean;
+  navigationExtras: NavigationExtras = {
+    state: {
+    }
+  };
   public appPages = [
     {
       title: 'DashBoard',
@@ -38,14 +45,16 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private firebaseApp: Firebase,
     private commonService: CommonService,
-    private cdr: ChangeDetectorRef
+    private localNotification: LocalNotifications,
+    private route: Router,
+    private ngZone: NgZone
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      this.statusBar.overlaysWebView(true);
       this.splashScreen.hide();
       this.initFirebase();
       this.checkTheme();
@@ -74,7 +83,35 @@ export class AppComponent implements OnInit {
 
     this.firebaseApp
       .onNotificationOpen()
-      .subscribe(data => console.log(`User opened a notification ${data}`));
+      .subscribe(data => {
+        console.log(`User opened a notification ${data.toString()}`);
+        if (data.tap) {
+            console.log('notification clicked  = ', data);
+            this.gotoChat(data);
+
+        } else {
+          this.localNotification.schedule({ 
+            data:data
+          });
+        }
+
+        });
+    this.localNotification.on('notification').subscribe(notification => {
+          console.log('On notification = ', notification);
+    })
+    this.localNotification.on('click').subscribe(notification => {
+      console.log('notification click = ', notification);
+      const param = notification.data;
+      this.gotoChat(param);
+      // this.ngZone.run(() => {
+      // });
+});
+    // this.firebaseApp.subscribe('notification').then(res => {
+    //   console.log('On notification = ', res);
+    // });
+    // this.firebaseApp.subscribe('click').then(res => {
+    //   console.log('On notification click = ', res);
+    // });
 
     this.firebaseApp
       .onTokenRefresh()
@@ -86,8 +123,12 @@ export class AppComponent implements OnInit {
   checkTheme() {
     if (window.localStorage.getItem('selectedTheme')) {
         this.selectedTheme = JSON.parse(window.localStorage.getItem('selectedTheme'));
+        this.statusBar.styleBlackTranslucent();
+
     } else {
       this.selectedTheme = false;
+      this.statusBar.styleDefault();
+
     }
     document.body.classList.toggle('dark',  this.selectedTheme);
 
@@ -97,5 +138,13 @@ export class AppComponent implements OnInit {
       this.selectedTheme = event.target.checked;
       document.body.classList.toggle('dark', event.detail.checked);
       window.localStorage.setItem('selectedTheme', JSON.stringify(this.selectedTheme));
+      this.selectedTheme ? this.statusBar.styleBlackTranslucent() : this.statusBar.styleDefault();
+  }
+  gotoChat(param) {
+    this.navigationExtras.state.from_notification_click = param;
+    this.ngZone.run(() => {
+      this.route.navigate(['chat'], {queryParams : param, skipLocationChange: true});
+    })
+
   }
 }

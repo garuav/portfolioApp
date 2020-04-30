@@ -7,4 +7,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true"> </ion-content>
+<ion-content [fullscreen]="true" class="chat-page">
+  <div class="chat-list">
+    <div  [class]="item?.sender === 'user' ? 'own-msg chat-txt-box' : 'admin-msg chat-txt-box'" *ngFor="let item of chatList;">
+      {{item.text}}
+    </div>
+    
+  </div>
+ 
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+
+      <div class="message-box">
+        <textarea [(ngModel)]="chatText"></textarea>
+          <ion-icon name="paper-plane-outline"   (click)="sendChatMessage()"></ion-icon>
+      </div>
+  </ion-toolbar>
