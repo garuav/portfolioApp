@@ -1,5 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import * as firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/auth'; // for authentication
+import 'firebase/firestore';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { serverKey } from './common.constants';
 import { Observable } from 'rxjs';
@@ -56,4 +59,9 @@ export class CommonService {
   saveMessage(uid, message) {
     return firebase.database().refFromURL('https://portfolio-3881c.firebaseio.com/' + uid).child('messages').push().update(message);
   }
+
+  getUserById(uid) {
+    return firebase.database().refFromURL('https://portfolio-3881c.firebaseio.com/' ).child(uid);
+  }
+
 }

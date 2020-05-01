@@ -3,15 +3,20 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Chat</ion-title>
+    <ion-title>Chat  {{currentUserData?.displayName ? 'With '+ currentUserData?.displayName :''}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="chat-page">
-  <div class="chat-list">
-    <div  [class]="item?.sender === 'user' ? 'own-msg chat-txt-box' : 'admin-msg chat-txt-box'" *ngFor="let item of chatList;">
-      {{item.text}}
+<ion-content [fullscreen]="true" class="chat-page" #ChatElementRef>
+  <div class="chat-list" >
+    <div class="messages-row" *ngFor="let item of chatList;">
+      <p *ngIf="item?.dateSepration"> {{item?.dateSepration | dateTimeFormat: 'checkDayWise'}}</p>
+      <div  [class]="item?.sender === 'user' ? 'own-msg chat-txt-box' : 'admin-msg chat-txt-box'" >
+        {{item.text}}
+        <p *ngIf="item?.dateTime"> {{item?.dateTime | dateTimeFormat}}</p>
+      </div>
     </div>
+   
     
   </div>
  

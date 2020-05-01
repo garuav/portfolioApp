@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/common/common.service';
-
+import * as moment from 'moment';
+import { LoadingController, IonContent } from '@ionic/angular';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.page.html',
@@ -12,12 +13,17 @@ export class ChatPage implements OnInit {
   currentUserData;
   chatList: any [];
   chatText;
-  constructor(private activateRoute: ActivatedRoute, private commonService: CommonService) { 
-    this.activateRoute.paramMap.subscribe(params => {
-      console.log('params = ', params);
-      this.currentUserData = params;
-      this.getAllMessages(this.currentUserData.uid);
-    })
+  @ViewChild('ChatElementRef', {static: false}) chatEle: IonContent;
+  constructor(private activateRoute: ActivatedRoute, private commonService: CommonService,
+              private loadingController: LoadingController, private ngZone: NgZone) {
+    this.activateRoute.paramMap.subscribe((params: any) => {
+      if ( Object.keys(params).length > 0 && params.uid) {
+        console.log('params = ', params);
+        this.currentUserData = params;
+        this.getAllMessages(this.currentUserData.uid);
+
+      }
+    });
   }
 
   ngOnInit() {
@@ -27,18 +33,38 @@ export class ChatPage implements OnInit {
     if (Object.keys(this.activateRoute.snapshot.queryParams).length > 0) {
       this.currentUserData = this.activateRoute.snapshot.queryParams;
       this.getAllMessages(this.currentUserData.uid);
-
+      this.getCurrentUserDetails(this.currentUserData.uid);
     }
-    // this.getAllMessages('n8waxPTELufETPR8JWqbbLWgfnJ3');
+    this.getAllMessages('n8waxPTELufETPR8JWqbbLWgfnJ3');
+    this.getCurrentUserDetails('n8waxPTELufETPR8JWqbbLWgfnJ3');
   }
-  getAllMessages(uid) {
+  async getAllMessages(uid) {
+    // tslint:disable-next-line:variable-name
+    
     this.commonService.getAllMessages(uid).on('value', res => {
       this.chatList = [];
       console.log('response from all messages = ', res.val());
       res.forEach(element => {
-        console.log('element = ', element.val());
-        this.chatList.push(element.val());
+        if (element.val().dateTime) {
+          const date = element.val().dateTime.split('T')[0];
+          console.log('element = ', element.val());
+          if ( this.chatList.findIndex(item => item.dateTime.includes(date)) === -1) {
+            this.chatList.push({
+             sender:  element.val().sender,
+             text:  element.val().text,
+             dateTime:  element.val().dateTime,
+             dateSepration:  element.val().dateTime
+            });
+          } else {
+            this.chatList.push(element.val());
+          }
+        }
       });
+      console.log('this.chatList = ', this.chatList);
+      console.log('this.chatEle = ', this.chatEle);
+      setTimeout(() => {
+          this.chatEle.scrollToBottom(500);
+      }, 100);
     }, error => {
     });
   }
@@ -66,6 +92,30 @@ export class ChatPage implements OnInit {
       this.chatText = '';
     }, error => {
       console.log('error from send Message = ', error );
+    });
+  }
+
+ async getCurrentUserDetails(uid) {
+    const loader =  await this.loadingController.create({
+      spinner: 'bubbles'
+    });
+    await loader.present();
+    this.commonService.getUserById(uid).once('value').then(response => {
+      loader.dismiss();
+      console.log('current user Detials = ', response.val());
+      const currentUser = {
+        displayName: response.val().displayName,
+        email: response.val().email,
+        photoURL: response.val().photoURL,
+        registration_token: response.val().registration_token,
+        uid: response.val().uid,
+      };
+      this.currentUserData = currentUser;
+      console.log('this.currentUserData = ', this.currentUserData);
+    }).catch(error => {
+      loader.dismiss();
+      console.log('error current user Detials = ', error);
+
     });
   }
 }

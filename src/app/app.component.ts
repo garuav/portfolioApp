@@ -90,7 +90,10 @@ export class AppComponent implements OnInit {
             this.gotoChat(data);
 
         } else {
-          this.localNotification.schedule({ 
+          this.localNotification.schedule({
+            id: data.object_id,
+            title: data.title,
+            text: data.body,
             data:data
           });
         }

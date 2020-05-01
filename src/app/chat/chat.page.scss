@@ -1,21 +1,34 @@
 .chat-page{
     .chat-list {
         // height: 100%;
-        .chat-txt-box{
-            padding: 1rem;
-            border: 2px solid #649c9c;
-            margin: .5rem;
-            border-radius: 10px;
-            display: flex;
-            &.own-msg {
-                justify-content: flex-start;
-                border: 2px solid #c47d61;
+        .messages-row{
+            p {
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
-            &.admin-msg{
-                justify-content: flex-end;
-                border: 2px solid #65a197;
+            .chat-txt-box{
+                padding: 1rem;
+                border: 2px solid #649c9c;
+                margin: .5rem;
+                border-radius: 10px;
+                display: flex;
+                flex-flow: column;
+                p{
+                    margin: 0;
+                    font-size: .7rem;
+                }
+                &.own-msg {
+                    align-items: flex-start;
+                    border: 2px solid #c47d61;
+                }
+                &.admin-msg{
+                    align-items: flex-end;
+                    border: 2px solid #65a197;
+                }
             }
         }
+       
        
     }
 }
