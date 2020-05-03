@@ -46,9 +46,9 @@ export class ChatPage implements OnInit {
       console.log('response from all messages = ', res.val());
       res.forEach(element => {
         if (element.val().dateTime) {
-          const date = element.val().dateTime.split('T')[0];
+          const date = element.val().dateTime;
           console.log('element = ', element.val());
-          if ( this.chatList.findIndex(item => item.dateTime.includes(date)) === -1) {
+          if ( this.chatList.findIndex(item => moment(item.dateTime).format('DD.MM.YYYY').includes(moment(date).format('DD.MM.YYYY'))) === -1) {
             this.chatList.push({
              sender:  element.val().sender,
              text:  element.val().text,
