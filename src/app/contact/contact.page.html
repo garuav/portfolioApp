@@ -3,21 +3,18 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Registered Users</ion-title>
+    <ion-title>Contacted Users</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="users-data">
-    <ion-card *ngFor="let user of usersList;">
+  <div class="contact-user-data">
+    <ion-card *ngFor="let user of contactList;">
       <ion-card-content>
-        <div class="img-block">
-          <img [src]="user?.photoURL" />
-        </div>
         <div class="current-user-data">
           <div class="user-name">
             <h5>
-              {{user?.displayName}}
+              {{user?.name}}
             </h5>
           </div>
           <div class="user-email">
@@ -25,8 +22,10 @@
               {{user?.email}}
             </h6>
           </div>
-          <div class="chat-icon">
-            <ion-icon name="chatbubble-outline" (click)="gotoChat(user)"></ion-icon>
+          <div class="description">
+            <h6>
+              {{user?.description}}
+            </h6>
           </div>
         </div>
         

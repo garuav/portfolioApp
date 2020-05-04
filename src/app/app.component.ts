@@ -38,6 +38,11 @@ export class AppComponent implements OnInit {
       url: '/registerd-users',
       icon: 'people',
     },
+    {
+      title: 'Contacted Users',
+      url: '/contact',
+      icon: 'mail',
+    },
   ];
   constructor(
     private platform: Platform,
@@ -147,7 +152,7 @@ export class AppComponent implements OnInit {
     this.navigationExtras.state.from_notification_click = param;
     this.ngZone.run(() => {
       this.route.navigate(['chat'], {queryParams : param, skipLocationChange: true});
-    })
+    });
 
   }
 }

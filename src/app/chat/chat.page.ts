@@ -35,12 +35,12 @@ export class ChatPage implements OnInit {
       this.getAllMessages(this.currentUserData.uid);
       this.getCurrentUserDetails(this.currentUserData.uid);
     }
-    this.getAllMessages('n8waxPTELufETPR8JWqbbLWgfnJ3');
-    this.getCurrentUserDetails('n8waxPTELufETPR8JWqbbLWgfnJ3');
+    // this.getAllMessages('n8waxPTELufETPR8JWqbbLWgfnJ3');
+    // this.getCurrentUserDetails('n8waxPTELufETPR8JWqbbLWgfnJ3');
   }
   async getAllMessages(uid) {
     // tslint:disable-next-line:variable-name
-    
+
     this.commonService.getAllMessages(uid).on('value', res => {
       this.chatList = [];
       console.log('response from all messages = ', res.val());

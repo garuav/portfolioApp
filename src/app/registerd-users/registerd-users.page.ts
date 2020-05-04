@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/common/common.service';
 import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registerd-users',
@@ -10,7 +11,7 @@ import { LoadingController } from '@ionic/angular';
 export class RegisterdUsersPage implements OnInit {
   private usersList: any[];
 
-  constructor( private commonService: CommonService, private loadingController: LoadingController) { }
+  constructor( private commonService: CommonService, private loadingController: LoadingController, private route: Router) { }
 
   ngOnInit() {
   }
@@ -27,12 +28,17 @@ export class RegisterdUsersPage implements OnInit {
           loader.dismiss();
           console.log('firebase data = ', response.val());
           response.forEach(element => {
-            this.usersList.push(element.toJSON());
+            if (element.key !== ('contact')) {
+              this.usersList.push(element.toJSON());
+            }
           });
           console.log('this.usersList = ', this.usersList);
         }).catch(error => {
           loader.dismiss();
           console.log('error  = ', error);
         });
+  }
+  gotoChat(user) {
+    this.route.navigate(['chat'], {queryParams : user, skipLocationChange: true});
   }
 }

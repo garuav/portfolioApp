@@ -1,4 +1,4 @@
-.users-data {
+.contact-users-data {
     ion-card-title{
         text-align: center;
     }
@@ -6,12 +6,6 @@
         display: flex;
         // justify-content: center;
         align-items: center;
-        .img-block{
-            img {
-                width: 5rem;
-                border-radius: 50%;
-            }
-        }
         .current-user-data {
             display: flex;
             align-items: center;
@@ -32,12 +26,6 @@
 
             }
         }
-        .chat-icon {
-            align-self: flex-end;
-            display: flex;
-            ion-icon {
-                font-size: 1.4rem;
-            }
-        }
+        
     }
 }

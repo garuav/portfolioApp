@@ -63,5 +63,7 @@ export class CommonService {
   getUserById(uid) {
     return firebase.database().refFromURL('https://portfolio-3881c.firebaseio.com/' ).child(uid);
   }
-
+  getContactedUsers() {
+    return firebase.database().refFromURL('https://portfolio-3881c.firebaseio.com/' ).child('contact');
+  }
 }
