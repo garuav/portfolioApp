@@ -41,8 +41,8 @@ export class CommonService {
       console.log('headers = ', header);
       const randomNum = Math.round(Math.random() * (99999 - 0 + 1)) + 0;
       const payload = {
-        registration_ids: [data.user_token],
-        data: {
+        to: data.user_token,
+        notification: {
           title: 'Chat Notification',
           body:  data.text,
           object_id: randomNum,
@@ -51,7 +51,7 @@ export class CommonService {
           uid: data.uid,
           dateTime: data.dateTime
         },
-        content_available: true
+        // content_available: true
       };
       return  this.http.post(`https://fcm.googleapis.com/fcm/send`, payload, { headers: header});
     }
