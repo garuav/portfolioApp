@@ -11,7 +11,7 @@
   <div class="chat-list" >
     <div class="messages-row" *ngFor="let item of chatList;">
       <p *ngIf="item?.dateSepration"> {{item?.dateSepration | dateTimeFormat: 'checkDayWise'}}</p>
-      <div  [class]="item?.sender === 'user' ? 'own-msg chat-txt-box' : 'admin-msg chat-txt-box'" >
+      <div  [class]="item?.sender === 'user' ? 'user-msg chat-txt-box' : 'admin-msg chat-txt-box'" >
         {{item.text}}
         <p *ngIf="item?.dateTime"> {{item?.dateTime | dateTimeFormat}}</p>
       </div>

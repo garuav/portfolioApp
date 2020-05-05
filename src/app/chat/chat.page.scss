@@ -2,10 +2,11 @@
     .chat-list {
         // height: 100%;
         .messages-row{
+            display: flex;
+            flex-flow: column;
+            align-items: flex-end;
             p {
-                display: flex;
-                justify-content: center;
-                align-items: center;
+               align-self: center;
             }
             .chat-txt-box{
                 padding: 1rem;
@@ -17,10 +18,12 @@
                 p{
                     margin: 0;
                     font-size: .7rem;
+                    align-self: flex-end;
                 }
-                &.own-msg {
-                    align-items: flex-start;
+                &.user-msg {
+                    // align-items: flex-start;
                     border: 2px solid #c47d61;
+                    align-self: flex-start;
                 }
                 &.admin-msg{
                     align-items: flex-end;
