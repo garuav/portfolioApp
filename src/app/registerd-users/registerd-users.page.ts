@@ -41,4 +41,12 @@ export class RegisterdUsersPage implements OnInit {
   gotoChat(user) {
     this.route.navigate(['chat'], {queryParams : user, skipLocationChange: true});
   }
+  doRefresh(event) {
+    // setTimeout(() => {
+      console.log('Async operation has ended');
+      this.usersList = [];
+      this.getUserData();
+      event.target.complete();
+    // }, 2000);
+  }
 }

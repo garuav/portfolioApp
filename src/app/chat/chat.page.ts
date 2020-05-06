@@ -69,30 +69,33 @@ export class ChatPage implements OnInit {
     });
   }
   sendChatMessage() {
-    const token = localStorage.getItem('token');
-    console.log('this.chatText = ', this.chatText);
-    const param = {
-      user_token: this.currentUserData.registration_token,
-      sender: 'admin',
-      text: this.chatText,
-      dateTime: new Date()
-    };
-    this.commonService.sendMessage(token, param).subscribe(res => {
-      console.log('response from send Message = ', res );
-      const obj = {
+    if (this.chatText !== '' && this.chatText.length > 0) {
+      const token = localStorage.getItem('token');
+      console.log('this.chatText = ', this.chatText);
+      const param = {
+        user_token: this.currentUserData.registration_token,
         sender: 'admin',
         text: this.chatText,
         dateTime: new Date()
-    };
-      this.commonService.saveMessage(this.currentUserData.uid, obj).then(response => {
-          console.log('response from save Message = ', response );
-        }).catch(error => {
-          console.log('error from save Message = ', error );
-        });
-      this.chatText = '';
-    }, error => {
-      console.log('error from send Message = ', error );
-    });
+      };
+      this.commonService.sendMessage(token, param).subscribe(res => {
+        console.log('response from send Message = ', res );
+        const obj = {
+          sender: 'admin',
+          text: this.chatText,
+          dateTime: new Date()
+      };
+        this.commonService.saveMessage(this.currentUserData.uid, obj).then(response => {
+            console.log('response from save Message = ', response );
+          }).catch(error => {
+            console.log('error from save Message = ', error );
+          });
+        this.chatText = '';
+      }, error => {
+        console.log('error from send Message = ', error );
+      });
+    }
+   
   }
 
  async getCurrentUserDetails(uid) {
