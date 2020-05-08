@@ -95,7 +95,6 @@ export class ChatPage implements OnInit {
         console.log('error from send Message = ', error );
       });
     }
-   
   }
 
  async getCurrentUserDetails(uid) {
