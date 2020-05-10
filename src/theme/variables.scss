@@ -147,6 +147,16 @@
     --ion-color-light-tint: #383a3e;
     --background: #000000;
     --color: #ffffff;
+
+    // android dark mode css 
+
+    .message-box {
+      textarea{
+        background: #242222;
+        color: #ffff;
+      }
+    }
+
   }
 
   /*
