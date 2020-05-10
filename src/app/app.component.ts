@@ -18,10 +18,6 @@ import { Router, NavigationExtras } from '@angular/router';
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
   private selectedTheme: boolean;
-  navigationExtras: NavigationExtras = {
-    state: {
-    }
-  };
   public appPages = [
     {
       title: 'DashBoard',
@@ -63,6 +59,9 @@ export class AppComponent implements OnInit {
       this.splashScreen.hide();
       this.initFirebase();
       this.checkTheme();
+      if (!this.commonService.getLocalStorageData('loginUserData')) {
+        this.googleLogin();
+      }
     });
   }
 
@@ -76,16 +75,6 @@ export class AppComponent implements OnInit {
   }
   initFirebase() {
     firebase.initializeApp(firebaseConfig);
-    this.firebaseApp
-      .getToken()
-      .then(token => {
-        console.log(`The token is ${token}`);
-        // firebase.storage().refFromURL('https://portfolio-3881c.appspot.com/mobileAppData/rujzYWu2tsoMbyNaXYP4').
-        this.commonService.saveTokenToDatabase(token);
-        localStorage.setItem('token', token);
-      }) // save the token server-side and use it to push notifications to this device
-      .catch(error => console.error('Error getting token', error));
-
     this.firebaseApp
       .onNotificationOpen()
       .subscribe(data => {
@@ -121,12 +110,6 @@ export class AppComponent implements OnInit {
     //   console.log('On notification click = ', res);
     // });
 
-    this.firebaseApp
-      .onTokenRefresh()
-      .subscribe((token: string) => {
-        console.log(`Got a new token ${token}`);
-        this.commonService.saveTokenToDatabase(token);
-      });
   }
   checkTheme() {
     if (window.localStorage.getItem('selectedTheme')) {
@@ -149,10 +132,65 @@ export class AppComponent implements OnInit {
       this.selectedTheme ? this.statusBar.styleBlackTranslucent() : this.statusBar.styleDefault();
   }
   gotoChat(param) {
-    this.navigationExtras.state.from_notification_click = param;
     this.ngZone.run(() => {
       this.route.navigate(['chat'], {queryParams : param, skipLocationChange: true});
     });
 
+  }
+  googleLogin() {
+    firebase
+    .auth()
+    .signInWithEmailAndPassword('gbgaurav461@gmail.com', 'gaurav71218')
+    .then((result: any) => {
+        // The signed-in user info.
+        console.log('result = ', result);
+        const user = result.user;
+        const temp: any = {
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          uid: user.uid,
+          registration_token: ''
+        };
+        this.firebaseApp
+      .getToken()
+      .then(token => {
+        console.log(`The token is ${token}`);
+        localStorage.setItem('token', token);
+        temp.registration_token = token;
+        this.commonService.saveGoogleLoginData(temp).then(res => {
+          console.log('response saveGoogleLoginData data = ', res);
+          this.commonService.setLocalStorageData('loginUserData', temp);
+          }).catch(error => {
+          console.log('error= ', error);
+          });
+        this.getRefreshToken();
+      }) // save the token server-side and use it to push notifications to this device
+      .catch(error => console.error('Error getting token', error));
+    }).catch(error => {
+          console.error('Error on google sign in  ', error);
+    });
+  }
+  getRefreshToken() {
+    this.firebaseApp
+      .onTokenRefresh()
+      .subscribe((token: string) => {
+        console.log(`Got a new token ${token}`);
+        if ( this.commonService.getLocalStorageData('loginUserData')) {
+            const userData =  this.commonService.getLocalStorageData('loginUserData');
+            userData['registration_token'] = token;
+            this.commonService.setLocalStorageData('loginUserData', userData);
+            this.commonService.saveGoogleLoginData(userData).then(res => {
+              console.log('response saveGoogleLoginData data = ', res);
+              }).catch(error => {
+              console.log('error= ', error);
+              });
+        } else {
+          this.googleLogin();
+        }
+      });
+  }
+  logOut() {
+    localStorage.clear();
   }
 }

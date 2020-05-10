@@ -14,17 +14,23 @@ export class CommonService {
   dataEmitter: EventEmitter<any> = new EventEmitter();
   constructor(private http: HttpClient) { }
 
-  saveTokenToDatabase(token) {
-    // tslint:disable-next-line:max-line-length
-    // firebase.firestore().collection(
-      firebase.firestore().collection('userData').doc('token').set({token:token}).then(res => {
-      console.log('response data = ', res);
-
-      }).catch(error => {
-      console.log('error= ', error);
-
-      });
+  setLocalStorageData(key: string, data: any) {
+    localStorage.setItem(key, JSON.stringify(data));
   }
+  getLocalStorageData(key: string) {
+    return JSON.parse(localStorage.getItem(key));
+  }
+  // saveTokenToDatabase(token) {
+  //   // tslint:disable-next-line:max-line-length
+  //   // firebase.firestore().collection(
+  //     firebase.firestore().collection('userData').doc('MobileAppUserData').set({token:token}).then(res => {
+  //     console.log('response data = ', res);
+
+  //     }).catch(error => {
+  //     console.log('error= ', error);
+
+  //     });
+  // }
 
   getUserData() {
    return firebase.database().refFromURL('https://portfolio-3881c.firebaseio.com/').once('value');
@@ -65,5 +71,8 @@ export class CommonService {
   }
   getContactedUsers() {
     return firebase.database().refFromURL('https://portfolio-3881c.firebaseio.com/' ).child('contact');
+  }
+  saveGoogleLoginData(data) {
+   return  firebase.firestore().collection('userData').doc('MobileAppUserData').set(data);
   }
 }
