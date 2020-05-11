@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, LoadingController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
@@ -48,7 +48,8 @@ export class AppComponent implements OnInit {
     private commonService: CommonService,
     private localNotification: LocalNotifications,
     private route: Router,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private loadingController: LoadingController
   ) {
     this.initializeApp();
   }
@@ -137,12 +138,17 @@ export class AppComponent implements OnInit {
     });
 
   }
-  googleLogin() {
+ async googleLogin() {
+    const loader =  await this.loadingController.create({
+      spinner: 'bubbles'
+    });
+    await loader.present();
     firebase
     .auth()
     .signInWithEmailAndPassword('gbgaurav461@gmail.com', 'gaurav71218')
     .then((result: any) => {
         // The signed-in user info.
+        loader.dismiss();
         console.log('result = ', result);
         const user = result.user;
         const temp: any = {
@@ -168,6 +174,7 @@ export class AppComponent implements OnInit {
       }) // save the token server-side and use it to push notifications to this device
       .catch(error => console.error('Error getting token', error));
     }).catch(error => {
+          loader.dismiss();
           console.error('Error on google sign in  ', error);
     });
   }
