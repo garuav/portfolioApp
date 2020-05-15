@@ -1,3 +1,14 @@
-#container{
-   
+.dashboard {
+    ion-card {
+        ion-card-content {
+            .user-count{
+                display: flex;
+                justify-content: space-between;
+                margin: 1rem;
+                h5 {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
 }

@@ -75,4 +75,7 @@ export class CommonService {
   saveGoogleLoginData(data) {
    return  firebase.firestore().collection('userData').doc('MobileAppUserData').set(data);
   }
+  getDashboardData() {
+    return firebase.firestore().collection('userData').doc('UsersData').get();
+  }
 }

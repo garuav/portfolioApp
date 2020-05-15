@@ -8,8 +8,22 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
-
-  <div id="container">
+  <div class="dashboard">
+    <ion-card >
+      <ion-card-content>
+          <div class="user-count">
+            <h5>Registered Users</h5> <h5>{{dashboardData?.users?.RegisteredUsers || 0}}</h5>
+          </div>
+          <div class="user-count">
+            <h5>Anonymous Users</h5> <h5>{{dashboardData?.users?.AnonymousUsers || 0}}</h5>
+          </div>
+          <div class="user-count">
+            <h5>Users Visits</h5> <h5>{{dashboardData?.users?.UsersVisits || 0}}</h5>
+          </div>
+          <div class="user-count">
+            <h5>Contacted Users</h5> <h5>{{dashboardData?.users?.ContactedUsers || 0}}</h5>
+          </div>
+      </ion-card-content>
+      </ion-card>
   </div>
 </ion-content>

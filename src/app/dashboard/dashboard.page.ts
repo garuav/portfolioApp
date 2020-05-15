@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { CommonService } from 'src/common/common.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,10 +9,26 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
-  public folder: string;
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  dashboardData = {
+    users: {}
+  };
+  constructor(private commonService: CommonService,  private loadingController: LoadingController) {}
 
   ngOnInit() {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+    this.getDashboardData();
+  }
+ async getDashboardData() {
+   const loader = await this.loadingController.create({
+      spinner: 'bubbles'
+    });
+   await loader.present();
+   this.commonService.getDashboardData().then(response => {
+      loader.dismiss();
+      console.log('dashboard data = ', response.data());
+      this.dashboardData.users = response.data();
+    }).catch(error => {
+      loader.dismiss();
+      console.log('error = ', error);
+    });
   }
 }
