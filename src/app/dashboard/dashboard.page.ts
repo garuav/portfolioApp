@@ -31,4 +31,11 @@ export class DashboardPage implements OnInit {
       console.log('error = ', error);
     });
   }
+  doRefresh(event) {
+    // setTimeout(() => {
+      console.log('Async operation has ended');
+      this.getDashboardData();
+      event.target.complete();
+    // }, 2000);
+  }
 }
