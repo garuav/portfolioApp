@@ -24,11 +24,11 @@ export class AppComponent implements OnInit {
       url: '/dashboard',
       icon: 'mail',
     },
-    {
-      title: 'Chat',
-      url: '/chat',
-      icon: 'paper-plane',
-    },
+    // {
+    //   title: 'Chat',
+    //   url: '/chat',
+    //   icon: 'paper-plane',
+    // },
     {
       title: 'Registered Users',
       url: '/registerd-users',
@@ -193,9 +193,7 @@ export class AppComponent implements OnInit {
         }
       });
   }
-  logOut() {
-    localStorage.clear();
-  }
+ 
   setRouteIndex() {
     const path = window.location.pathname.split('/')[1];
     if (path !== undefined) {
