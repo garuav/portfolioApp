@@ -67,12 +67,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    const path = window.location.pathname.split('/')[1];
-    if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(
-        page => page.title.toLowerCase() === path.toLowerCase()
-      );
-    }
+   
   }
   initFirebase() {
     firebase.initializeApp(firebaseConfig);
@@ -150,6 +145,7 @@ export class AppComponent implements OnInit {
         // The signed-in user info.
         loader.dismiss();
         console.log('result = ', result);
+        this.setRouteIndex();
         const user = result.user;
         const temp: any = {
           displayName: user.displayName,
@@ -199,5 +195,13 @@ export class AppComponent implements OnInit {
   }
   logOut() {
     localStorage.clear();
+  }
+  setRouteIndex() {
+    const path = window.location.pathname.split('/')[1];
+    if (path !== undefined) {
+      this.selectedIndex = this.appPages.findIndex(
+        page => page.title.toLowerCase() === path.toLowerCase()
+      );
+    }
   }
 }
