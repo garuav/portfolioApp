@@ -12,7 +12,7 @@ export class DashboardPage implements OnInit {
   dashboardData = {
     users: {}
   };
-  constructor(private commonService: CommonService,  private loadingController: LoadingController) {}
+  constructor(private commonService: CommonService,  private loadingController: LoadingController, private route: Router) {}
 
   ngOnInit() {
     this.getDashboardData();
@@ -30,6 +30,13 @@ export class DashboardPage implements OnInit {
       loader.dismiss();
       console.log('error = ', error);
     });
+  }
+  gotoPage(type) {
+    if (type === 'registered') {
+      this.route.navigate(['registerd-users'], {skipLocationChange: true});
+    } else {
+      this.route.navigate(['contact'], {skipLocationChange: true});
+    }
   }
   doRefresh(event) {
     // setTimeout(() => {
