@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.overlaysWebView(true);
+      this.statusBar.overlaysWebView(false);
       this.splashScreen.hide();
       this.initFirebase();
       this.checkTheme();
