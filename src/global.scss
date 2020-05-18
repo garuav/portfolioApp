@@ -27,7 +27,10 @@
 
 @import "./theme/variables.scss";
 
-.header-md {
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-
+html, body {
+    padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
+  padding-top: env(safe-area-inset-top); /* iOS 11.2 */
+  // margin-bottom: env(safe-area-inset-bottom);
+  // height: calc(100% - constant(safe-area-inset-top));
+  height: calc(100% - env(safe-area-inset-top) - env(safe-area-inset-bottom));
 }

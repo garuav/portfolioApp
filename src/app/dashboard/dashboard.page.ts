@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { CommonService } from 'src/common/common.service';
 import { LoadingController } from '@ionic/angular';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -44,5 +44,8 @@ export class DashboardPage implements OnInit {
       this.getDashboardData();
       event.target.complete();
     // }, 2000);
+  }
+  getToday(){
+  return   moment().format('DD-MM-YYYY, hh:MM:ss a');
   }
 }
