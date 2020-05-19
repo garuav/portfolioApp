@@ -45,7 +45,7 @@ export class DashboardPage implements OnInit {
       event.target.complete();
     // }, 2000);
   }
-  getToday(){
-  return   moment().format('DD-MM-YYYY, hh:MM:ss a');
-  }
+  // getToday(){
+  // return   moment().format('DD-MM-YYYY, hh:MM:ss a');
+  // }
 }
