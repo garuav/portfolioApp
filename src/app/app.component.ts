@@ -62,6 +62,7 @@ export class AppComponent implements OnInit {
       this.checkTheme();
       if (!this.commonService.getLocalStorageData('loginUserData')) {
         this.googleLogin();
+        
       }
     });
   }
