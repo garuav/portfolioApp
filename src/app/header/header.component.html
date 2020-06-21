@@ -1,0 +1,11 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button  fill="clear" (click)="goBack()" *ngIf="headerData?.canGoBack">
+        <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+     </ion-button>
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{headerData?.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>

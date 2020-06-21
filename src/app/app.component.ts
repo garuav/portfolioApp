@@ -16,7 +16,7 @@ import { Router, NavigationExtras } from '@angular/router';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public selectedIndex = 0;
+  public selectedIndex;
   private selectedTheme: boolean;
   public appPages = [
     {
@@ -56,19 +56,17 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.overlaysWebView(false);
+      this.statusBar.overlaysWebView(true);
       this.splashScreen.hide();
       this.initFirebase();
       this.checkTheme();
       if (!this.commonService.getLocalStorageData('loginUserData')) {
         this.googleLogin();
-        
       }
     });
   }
 
   ngOnInit() {
-   
   }
   initFirebase() {
     firebase.initializeApp(firebaseConfig);
@@ -146,6 +144,7 @@ export class AppComponent implements OnInit {
         // The signed-in user info.
         loader.dismiss();
         console.log('result = ', result);
+        this.selectedIndex = 0;
         this.setRouteIndex();
         const user = result.user;
         const temp: any = {

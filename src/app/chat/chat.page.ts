@@ -2,7 +2,9 @@ import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, NgZone } f
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/common/common.service';
 import * as moment from 'moment';
-import { LoadingController, IonContent } from '@ionic/angular';
+import { LoadingController, IonContent, NavController } from '@ionic/angular';
+import { HeaderDataRef } from '../header/header.ref';
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.page.html',
@@ -13,12 +15,16 @@ export class ChatPage implements OnInit {
   currentUserData;
   chatList: any [];
   chatText;
+  headerData = new HeaderDataRef({
+    title: `Chat`,
+    canGoBack: true
+  });
   @ViewChild('ChatElementRef', {static: false}) chatEle: IonContent;
   constructor(private activateRoute: ActivatedRoute, private commonService: CommonService,
               private loadingController: LoadingController, private ngZone: NgZone) {
     this.activateRoute.paramMap.subscribe((params: any) => {
       if ( Object.keys(params).length > 0 && params.uid) {
-        console.log('params = ', params);
+        // console.log('params = ', params);
         this.currentUserData = params;
         this.getAllMessages(this.currentUserData.uid);
 
@@ -47,7 +53,7 @@ export class ChatPage implements OnInit {
       res.forEach(element => {
         if (element.val().dateTime) {
           const date = element.val().dateTime;
-          console.log('element = ', element.val());
+          // console.log('element = ', element.val());
           if ( this.chatList.findIndex(item => moment(item.dateTime).format('DD.MM.YYYY').includes(moment(date).format('DD.MM.YYYY'))) === -1) {
             this.chatList.push({
              sender:  element.val().sender,
@@ -60,8 +66,8 @@ export class ChatPage implements OnInit {
           }
         }
       });
-      console.log('this.chatList = ', this.chatList);
-      console.log('this.chatEle = ', this.chatEle);
+      // console.log('this.chatList = ', this.chatList);
+      // console.log('this.chatEle = ', this.chatEle);
       setTimeout(() => {
           this.chatEle.scrollToBottom(500);
       }, 100);
@@ -113,6 +119,7 @@ export class ChatPage implements OnInit {
         uid: response.val().uid,
       };
       this.currentUserData = currentUser;
+      this.headerData.title = `Chat ${this.currentUserData.displayName ? 'With ' + this.currentUserData.displayName : ''} `;
       console.log('this.currentUserData = ', this.currentUserData);
     }).catch(error => {
       loader.dismiss();
