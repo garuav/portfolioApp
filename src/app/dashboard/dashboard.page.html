@@ -23,8 +23,8 @@
     </ion-card> -->
     <ion-card class="card">
       <ion-card-content>
-          <div class="user-count">
-            <h5>Registered Users</h5> <h5 style="text-decoration: underline;" (click)="gotoPage('registered')">{{dashboardData?.users?.RegisteredUsers || 0}}</h5>
+          <div class="user-count" (click)="gotoPage('registered')">
+            <h5 style="text-decoration: underline;">Registered Users</h5> <h5 style="text-decoration: underline;" >{{dashboardData?.users?.RegisteredUsers || 0}}</h5>
           </div>
           <div class="user-count">
             <h5>Anonymous Users</h5> <h5>{{dashboardData?.users?.AnonymousUsers || 0}}</h5>
@@ -32,8 +32,8 @@
           <div class="user-count">
             <h5>Users Visits</h5> <h5>{{dashboardData?.users?.UsersVisits || 0}}</h5>
           </div>
-          <div class="user-count">
-            <h5>Contacted Users</h5> <h5 style="text-decoration: underline;" (click)="gotoPage('contacted')">{{dashboardData?.users?.ContactedUsers || 0}}</h5>
+          <div class="user-count" (click)="gotoPage('contacted')">
+            <h5 style="text-decoration: underline;">Contacted Users</h5> <h5 style="text-decoration: underline;" >{{dashboardData?.users?.ContactedUsers || 0}}</h5>
           </div>
       </ion-card-content>
       </ion-card>
