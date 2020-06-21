@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/common/common.service';
 import * as moment from 'moment';
 import { LoadingController, IonContent, NavController } from '@ionic/angular';
-import { HeaderDataRef } from '../header/header.ref';
+import { HeaderDataRef } from '../shared/header/header.ref';
 
 @Component({
   selector: 'app-chat',

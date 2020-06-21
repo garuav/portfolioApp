@@ -33,9 +33,9 @@ export class DashboardPage implements OnInit {
   }
   gotoPage(type) {
     if (type === 'registered') {
-      this.route.navigate(['registerd-users'], {skipLocationChange: true});
+      this.route.navigate(['registerd-users']);
     } else {
-      this.route.navigate(['contact'], {skipLocationChange: true});
+      this.route.navigate(['contact']);
     }
   }
   doRefresh(event) {
