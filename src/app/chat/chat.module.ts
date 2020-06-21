@@ -8,13 +8,15 @@ import { ChatPageRoutingModule } from './chat-routing.module';
 
 import { ChatPage } from './chat.page';
 import { DateTimeFormatPipe } from 'src/common/date-time-format.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ChatPageRoutingModule
+    ChatPageRoutingModule,
+    SharedModule
   ],
   declarations: [ChatPage, DateTimeFormatPipe]
 })

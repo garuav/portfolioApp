@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/common/common.service';
 import { LoadingController } from '@ionic/angular';
+import { HeaderDataRef } from '../shared/header/header.ref';
 
 @Component({
   selector: 'app-contact',
@@ -9,6 +10,10 @@ import { LoadingController } from '@ionic/angular';
 })
 export class ContactPage implements OnInit {
   contactList: any = [];
+  headerData = new HeaderDataRef({
+    title: `Contacted Users`,
+    canGoBack: false
+  });
   constructor(private commonService: CommonService, private loadingController: LoadingController) { }
 
   ngOnInit() {

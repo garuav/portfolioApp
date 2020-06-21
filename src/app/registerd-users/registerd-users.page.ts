@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/common/common.service';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { HeaderDataRef } from '../shared/header/header.ref';
 
 @Component({
   selector: 'app-registerd-users',
@@ -10,8 +11,13 @@ import { Router } from '@angular/router';
 })
 export class RegisterdUsersPage implements OnInit {
   private usersList: any[];
-
-  constructor( private commonService: CommonService, private loadingController: LoadingController, private route: Router) { }
+  headerData = new HeaderDataRef({
+    title: `Registered Users`,
+    canGoBack: false
+  });
+  constructor( private commonService: CommonService, private loadingController: LoadingController, private route: Router,
+              
+    ) { }
 
   ngOnInit() {
   }
@@ -39,7 +45,8 @@ export class RegisterdUsersPage implements OnInit {
         });
   }
   gotoChat(user) {
-    this.route.navigate(['chat'], {queryParams : user, skipLocationChange: true});
+    // this.navCtrl.navigateForward('chat', {queryParams : user});
+    this.route.navigate(['chat'], {queryParams : user});
   }
   doRefresh(event) {
     // setTimeout(() => {
