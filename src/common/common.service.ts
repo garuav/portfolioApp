@@ -20,17 +20,18 @@ export class CommonService {
   getLocalStorageData(key: string) {
     return JSON.parse(localStorage.getItem(key));
   }
-  // saveTokenToDatabase(token) {
-  //   // tslint:disable-next-line:max-line-length
-  //   // firebase.firestore().collection(
-  //     firebase.firestore().collection('userData').doc('MobileAppUserData').set({token:token}).then(res => {
-  //     console.log('response data = ', res);
+  saveTokenToDatabase(token) {
+    // tslint:disable-next-line:max-line-length
+    // firebase.firestore().collection(
+     return firebase.firestore().collection('userData').doc('MobileAppToken').set({registration_token: token});
+      // .set({token:token}).then(res => {
+      // console.log('response data = ', res);
 
-  //     }).catch(error => {
-  //     console.log('error= ', error);
+      // }).catch(error => {
+      // console.log('error= ', error);
 
-  //     });
-  // }
+      // });
+  }
 
   getUserData() {
    return firebase.database().refFromURL('https://portfolio-3881c.firebaseio.com/').once('value');
