@@ -34,3 +34,6 @@ html, body {
   // height: calc(100% - constant(safe-area-inset-top));
   height: calc(100% - env(safe-area-inset-top) - env(safe-area-inset-bottom));
 }
+body ion-app {
+  margin-top: 20px;
+}

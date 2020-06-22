@@ -154,8 +154,7 @@
       textarea{
         background: #242222 !important;
         color: #ffff !important;
-        --background: #242222 !important;
-        background-color: var(--ion-color-dark);
+      
       }
     }
 
@@ -235,16 +234,7 @@
     --ion-color-step-950: #f3f3f3;
 
     --ion-item-background: #1A1B1E;
-    .toolbar-container{
-      .message-box {
-        textarea{
-          background: #242222 !important;
-          color: #ffff !important;
-          --background: #242222 !important;
-          background-color: var(--ion-color-dark) !important;
-        }
-      }
-    }
+ 
   }
 
   ion-title.title-large {
@@ -257,5 +247,5 @@
 
 $colors: (
    green-blue: '#649c9c',
-   lightgrey: '#cdcdcd'
+   lightgrey: '#cdcdcd',
 )

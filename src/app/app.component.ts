@@ -113,7 +113,7 @@ export class AppComponent implements OnInit {
 
     } else {
       this.selectedTheme = false;
-      this.statusBar.styleDefault();
+      this.statusBar.styleBlackTranslucent();
 
     }
     document.body.classList.toggle('dark',  this.selectedTheme);
@@ -127,9 +127,15 @@ export class AppComponent implements OnInit {
       this.selectedTheme ? this.statusBar.styleBlackTranslucent() : this.statusBar.styleDefault();
   }
   gotoChat(param) {
-    this.ngZone.run(() => {
-      this.route.navigate(['chat'], {queryParams : param, skipLocationChange: true});
-    });
+    if (param.objectType === 'chat') {
+      this.ngZone.run(() => {
+        this.route.navigate(['chat'], {queryParams : param});
+      });
+    } else if (param.objectType === 'contact') {
+      this.ngZone.run(() => {
+        this.route.navigate(['contact'], {queryParams : param});
+      });
+    }
 
   }
  async googleLogin() {
