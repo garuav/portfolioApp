@@ -125,3 +125,9 @@ ion-item.selected {
 .card{
   border-radius: 10px;
 }
+#inbox-list{
+  padding-top: 0;
+  ion-list-header{
+    padding: 10px;;
+  }
+}

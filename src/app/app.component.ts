@@ -1,10 +1,13 @@
-import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone, ViewEncapsulation } from '@angular/core';
 
 import { Platform, LoadingController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/auth'; // for authentication
+import 'firebase/firestore';
 import { firebaseConfig } from 'src/common/common.constants';
 import { CommonService } from 'src/common/common.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
@@ -14,6 +17,7 @@ import { Router, NavigationExtras } from '@angular/router';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
   public selectedIndex;
@@ -70,6 +74,23 @@ export class AppComponent implements OnInit {
   }
   initFirebase() {
     firebase.initializeApp(firebaseConfig);
+    this.firebaseApp
+      .getToken()
+      .then(token => {
+        console.log(`The token is ${token}`);
+        localStorage.setItem('token', token);
+        // temp.registration_token = token;
+        this.commonService.saveTokenToDatabase(token).then(res => {
+          console.log('response saveGoogleLoginData data = ', res);
+          // const temp = this.commonService.getLocalStorageData('loginUserData');
+          // temp['registration_token'] = token;
+          // this.commonService.setLocalStorageData('loginUserData', temp);
+          }).catch(error => {
+          console.log('error= ', error);
+          });
+        this.getRefreshToken();
+      }) // save the token server-side and use it to push notifications to this device
+      .catch(error => console.error('Error getting token', error));
     this.firebaseApp
       .onNotificationOpen()
       .subscribe(data => {
@@ -160,21 +181,12 @@ export class AppComponent implements OnInit {
           uid: user.uid,
           registration_token: ''
         };
-        this.firebaseApp
-      .getToken()
-      .then(token => {
-        console.log(`The token is ${token}`);
-        localStorage.setItem('token', token);
-        temp.registration_token = token;
         this.commonService.saveGoogleLoginData(temp).then(res => {
           console.log('response saveGoogleLoginData data = ', res);
           this.commonService.setLocalStorageData('loginUserData', temp);
           }).catch(error => {
           console.log('error= ', error);
           });
-        this.getRefreshToken();
-      }) // save the token server-side and use it to push notifications to this device
-      .catch(error => console.error('Error getting token', error));
     }).catch(error => {
           loader.dismiss();
           console.error('Error on google sign in  ', error);
@@ -185,11 +197,12 @@ export class AppComponent implements OnInit {
       .onTokenRefresh()
       .subscribe((token: string) => {
         console.log(`Got a new token ${token}`);
+        localStorage.setItem('token', token);
         if ( this.commonService.getLocalStorageData('loginUserData')) {
-            const userData =  this.commonService.getLocalStorageData('loginUserData');
-            userData['registration_token'] = token;
-            this.commonService.setLocalStorageData('loginUserData', userData);
-            this.commonService.saveGoogleLoginData(userData).then(res => {
+            // const userData =  this.commonService.getLocalStorageData('loginUserData');
+            // userData['registration_token'] = token;
+            // this.commonService.setLocalStorageData('loginUserData', userData);
+            this.commonService.saveTokenToDatabase(token).then(res => {
               console.log('response saveGoogleLoginData data = ', res);
               }).catch(error => {
               console.log('error= ', error);
