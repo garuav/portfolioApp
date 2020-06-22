@@ -9,7 +9,7 @@ import { HeaderDataRef } from '../shared/header/header.ref';
   selector: 'app-chat',
   templateUrl: './chat.page.html',
   styleUrls: ['./chat.page.scss'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  encapsulation: ViewEncapsulation.None
 })
 export class ChatPage implements OnInit {
   currentUserData;

@@ -17,7 +17,7 @@
   <ion-toolbar>
 
       <div class="message-box">
-        <textarea [(ngModel)]="chatText"></textarea>
+        <textarea [(ngModel)]="chatText" autofocus placeholder="Enter message"></textarea>
           <ion-icon name="paper-plane-outline"   (click)="sendChatMessage()"></ion-icon>
       </div>
   </ion-toolbar>
