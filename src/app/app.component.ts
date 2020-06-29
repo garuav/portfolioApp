@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.overlaysWebView(true);
+      this.statusBar.overlaysWebView(false);
       this.splashScreen.hide();
       this.initFirebase();
       this.checkTheme();
@@ -148,7 +148,7 @@ export class AppComponent implements OnInit {
       this.selectedTheme ? this.statusBar.styleBlackTranslucent() : this.statusBar.styleDefault();
   }
   gotoChat(param) {
-    if (param.objectType === 'chat') {
+    if (param.objectType === 'chat_notification') {
       this.ngZone.run(() => {
         this.route.navigate(['chat'], {queryParams : param});
       });
