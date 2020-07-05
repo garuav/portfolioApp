@@ -16,7 +16,7 @@
     <ion-card *ngFor="let user of usersList;">
       <ion-card-content>
         <div class="img-block">
-          <img [src]="user?.photoURL" />
+          <img [src]="user?.photoURL" onerror="this.src ='./assets/images/default-avatar-image.png'"/>
         </div>
         <div class="current-user-data">
           <div class="user-name">
