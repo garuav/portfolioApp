@@ -12,7 +12,7 @@ export class ContactPage implements OnInit {
   contactList: any = [];
   headerData = new HeaderDataRef({
     title: `Contacted Users`,
-    canGoBack: false
+    canGoBack: true
   });
   constructor(private commonService: CommonService, private loadingController: LoadingController) { }
 

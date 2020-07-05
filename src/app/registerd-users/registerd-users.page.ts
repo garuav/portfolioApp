@@ -13,11 +13,11 @@ export class RegisterdUsersPage implements OnInit {
   private usersList: any[];
   headerData = new HeaderDataRef({
     title: `Registered Users`,
-    canGoBack: false
+    canGoBack: true
   });
   constructor( private commonService: CommonService, private loadingController: LoadingController, private route: Router,
-              
-    ) { }
+    ) {
+    }
 
   ngOnInit() {
   }
