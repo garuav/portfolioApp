@@ -37,6 +37,9 @@ export class ContactPage implements OnInit {
         console.log('error = ', error);
       });
   }
+  emailUser(user) {
+    window.open(`mailto:${user.email}`);
+  }
   doRefresh(event) {
       this.contactList = [];
       console.log('Async operation has ended');
