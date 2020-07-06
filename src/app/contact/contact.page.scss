@@ -1,4 +1,4 @@
-.contact-users-data {
+.contact-user-data {
     // margin-top: 1rem;
     ion-card-title{
         text-align: center;
@@ -9,8 +9,9 @@
         align-items: center;
         .current-user-data {
             display: flex;
-            align-items: center;
+            // align-items: center;
             flex-flow: column;
+            width: 100%;
         }
         .user-name {
             h5 {
@@ -20,13 +21,24 @@
             }
         }
         .user-email {
-            padding: 0 1rem;
+           display: flex;
+           justify-content: space-around;
+           align-items: center;
             h6 {
                 font-size: 1rem;
                 font-weight: 400;
-
+                flex-grow: 1;
+            }
+            ion-icon{
+                font-size: 1.5rem;
             }
         }
-        
+        .description{
+            h6{
+                font-size: 1rem;
+                font-weight: 400;
+                text-transform: capitalize;
+            }
+        }
     }
 }
