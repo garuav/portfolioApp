@@ -44,9 +44,14 @@ export class RegisterdUsersPage implements OnInit {
           console.log('error  = ', error);
         });
   }
-  gotoChat(user) {
+  gotoPage(page, user) {
     // this.navCtrl.navigateForward('chat', {queryParams : user});
-    this.route.navigate(['chat'], {queryParams : user});
+    if (page === 'mail') {
+        window.open(`mailto:${user.email}`);
+    } else if(page === 'chat') {
+      this.route.navigate(['chat'], {queryParams : user});
+
+    }
   }
   doRefresh(event) {
     // setTimeout(() => {

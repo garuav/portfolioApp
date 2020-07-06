@@ -36,8 +36,11 @@
         .chat-icon {
             align-self: flex-end;
             display: flex;
+            margin: .5rem 0;
             ion-icon {
                 font-size: 1.4rem;
+                margin:  0 .5rem;
+
             }
         }
     }
