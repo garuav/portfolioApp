@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     {
       title: 'DashBoard',
       url: '/dashboard',
-      icon: 'mail',
+      icon: 'desktop',
     },
     // {
     //   title: 'Chat',
@@ -71,6 +71,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    const el = document.querySelector('.item-native') as HTMLElement;
+    el.style.setProperty('background', 'transparent');
   }
   initFirebase() {
     firebase.initializeApp(firebaseConfig);
