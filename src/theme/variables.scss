@@ -74,6 +74,11 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+      // ionic menu custom colors---start
+      --ion-color-green-background: #3cb976;
+      --ion-background-transparent: transparent;
+    // ionic menu custom colors---ends
 }
 
 // @media (prefers-color-scheme: dark) {
@@ -147,6 +152,11 @@
     --ion-color-light-tint: #383a3e;
     --background: #000000;
     --color: #ffffff;
+
+    // ionic menu custom colors---start
+      --ion-color-green-background: #3cb976;
+    // ionic menu custom colors---ends
+
 
     // android dark mode css 
 
