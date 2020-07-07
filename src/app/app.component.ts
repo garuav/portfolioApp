@@ -91,7 +91,7 @@ export class AppComponent implements OnInit {
           console.log('error= ', error);
           });
         this.getRefreshToken();
-      }) // save the token server-side and use it to push notifications to this device
+      }) 
       .catch(error => console.error('Error getting token', error));
     this.firebaseApp
       .onNotificationOpen()
