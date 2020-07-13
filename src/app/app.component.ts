@@ -147,7 +147,7 @@ export class AppComponent implements OnInit {
       this.selectedTheme = event.target.checked;
       document.body.classList.toggle('dark', event.detail.checked);
       window.localStorage.setItem('selectedTheme', JSON.stringify(this.selectedTheme));
-      this.selectedTheme ? this.statusBar.styleBlackTranslucent() : this.statusBar.styleDefault();
+      this.selectedTheme ? this.statusBar.styleBlackTranslucent() : this.statusBar.styleBlackTranslucent();
   }
   gotoChat(param) {
     if (param.objectType === 'chat_notification') {
