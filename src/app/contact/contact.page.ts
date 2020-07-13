@@ -30,7 +30,7 @@ export class ContactPage implements OnInit {
         console.log('response = ', res);
         res.forEach(element => {
           console.log('element = ', element.val());
-          this.contactList.push(element.val());
+          this.contactList.unshift(element.val());
         });
       }, error => {
         loader.dismiss();
