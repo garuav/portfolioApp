@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/common/common.service';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { HeaderDataRef } from '../shared/header/header.ref';
 
@@ -45,7 +45,6 @@ export class RegisterdUsersPage implements OnInit {
         });
   }
   gotoPage(page, user) {
-    // this.navCtrl.navigateForward('chat', {queryParams : user});
     if (page === 'mail') {
         window.open(`mailto:${user.email}`);
     } else if(page === 'chat') {
@@ -54,11 +53,9 @@ export class RegisterdUsersPage implements OnInit {
     }
   }
   doRefresh(event) {
-    // setTimeout(() => {
       console.log('Async operation has ended');
       this.usersList = [];
       this.getUserData();
       event.target.complete();
-    // }, 2000);
   }
 }
