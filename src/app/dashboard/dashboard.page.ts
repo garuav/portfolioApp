@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import {  Router } from '@angular/router';
 import { CommonService } from 'src/common/common.service';
 import { LoadingController } from '@ionic/angular';
-import * as moment from 'moment';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',

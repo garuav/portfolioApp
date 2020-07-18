@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/common/common.service';
 import * as moment from 'moment';
-import { LoadingController, IonContent, NavController } from '@ionic/angular';
+import { LoadingController, IonContent } from '@ionic/angular';
 import { HeaderDataRef } from '../shared/header/header.ref';
 
 @Component({
@@ -24,7 +24,6 @@ export class ChatPage implements OnInit {
               private loadingController: LoadingController, private ngZone: NgZone) {
     this.activateRoute.paramMap.subscribe((params: any) => {
       if ( Object.keys(params).length > 0 && params.uid) {
-        // console.log('params = ', params);
         this.currentUserData = params;
         this.getAllMessages(this.currentUserData.uid);
 
@@ -45,16 +44,14 @@ export class ChatPage implements OnInit {
     // this.getCurrentUserDetails('n8waxPTELufETPR8JWqbbLWgfnJ3');
   }
   async getAllMessages(uid) {
-    // tslint:disable-next-line:variable-name
 
     this.commonService.getAllMessages(uid).on('value', res => {
       this.chatList = [];
-      console.log('response from all messages = ', res.val());
       res.forEach(element => {
         if (element.val().dateTime) {
           const date = element.val().dateTime;
-          // console.log('element = ', element.val());
-          if ( this.chatList.findIndex(item => moment(item.dateTime).format('DD.MM.YYYY').includes(moment(date).format('DD.MM.YYYY'))) === -1) {
+          if ( this.chatList.findIndex(item => moment(item.dateTime).format('DD.MM.YYYY').includes
+          (moment(date).format('DD.MM.YYYY'))) === -1) {
             this.chatList.push({
              sender:  element.val().sender,
              text:  element.val().text,
@@ -66,8 +63,6 @@ export class ChatPage implements OnInit {
           }
         }
       });
-      // console.log('this.chatList = ', this.chatList);
-      // console.log('this.chatEle = ', this.chatEle);
       setTimeout(() => {
           this.chatEle.scrollToBottom(500);
       }, 100);
