@@ -47,7 +47,7 @@ export class RegisterdUsersPage implements OnInit {
   gotoPage(page, user) {
     if (page === 'mail') {
         window.open(`mailto:${user.email}`);
-    } else if(page === 'chat') {
+    } else if (page === 'chat') {
       this.route.navigate(['chat'], {queryParams : user});
 
     }
