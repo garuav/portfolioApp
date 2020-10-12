@@ -23,7 +23,7 @@ export class DashboardPage implements OnInit {
    await loader.present();
    this.commonService.getDashboardData().then(response => {
       loader.dismiss();
-      console.log('dashboard data = ', response.data());
+      // console.log('dashboard data = ', response.data());
       this.dashboardData.users = response.data();
     }).catch(error => {
       loader.dismiss();
@@ -39,7 +39,7 @@ export class DashboardPage implements OnInit {
   }
   doRefresh(event) {
     // setTimeout(() => {
-      console.log('Async operation has ended');
+      // console.log('Async operation has ended');
       this.getDashboardData();
       event.target.complete();
     // }, 2000);
