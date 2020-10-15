@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     console.log('headerData = ', this.headerData);
   }
   ngOnChanges(simple: SimpleChanges) {
-    console.log('simple change = ', simple);
+    // console.log('simple change = ', simple);
     if (simple && simple.firstChange) {
         this.headerData = simple.headerData.currentValue;
     }
