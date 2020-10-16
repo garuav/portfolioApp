@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   constructor(private location: Location) { }
 
   ngOnInit() {
-    console.log('headerData = ', this.headerData);
+    // console.log('headerData = ', this.headerData);
   }
   ngOnChanges(simple: SimpleChanges) {
     // console.log('simple change = ', simple);
