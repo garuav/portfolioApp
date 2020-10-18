@@ -32,7 +32,7 @@ export class RegisterdUsersPage implements OnInit {
     await loader.present();
     this.commonService.getUserData().then(response => {
           loader.dismiss();
-          console.log('firebase data = ', response.val());
+          // console.log('firebase data = ', response.val());
           response.forEach(element => {
             if (element.key !== ('contact')) {
               this.usersList.push(element.toJSON());
