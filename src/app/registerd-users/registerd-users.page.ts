@@ -38,7 +38,7 @@ export class RegisterdUsersPage implements OnInit {
               this.usersList.push(element.toJSON());
             }
           });
-          console.log('this.usersList = ', this.usersList);
+          // console.log('this.usersList = ', this.usersList);
         }).catch(error => {
           loader.dismiss();
           console.log('error  = ', error);
