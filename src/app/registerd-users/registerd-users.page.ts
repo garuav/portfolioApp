@@ -53,7 +53,7 @@ export class RegisterdUsersPage implements OnInit {
     }
   }
   doRefresh(event) {
-      console.log('Async operation has ended');
+      // console.log('Async operation has ended');
       this.usersList = [];
       this.getUserData();
       event.target.complete();
