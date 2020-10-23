@@ -27,7 +27,7 @@ export class ContactPage implements OnInit {
     await loader.present();
     this.commonService.getContactedUsers().on('value', res => {
         loader.dismiss();
-        console.log('response = ', res);
+        // console.log('response = ', res);
         res.forEach(element => {
           console.log('element = ', element.val());
           this.contactList.unshift(element.val());
