@@ -34,7 +34,7 @@ export class ChatPage implements OnInit {
   ngOnInit() {
   }
   ionViewWillEnter() {
-    console.log('activated route = ', this.activateRoute.snapshot.queryParams);
+    // console.log('activated route = ', this.activateRoute.snapshot.queryParams);
     if (Object.keys(this.activateRoute.snapshot.queryParams).length > 0) {
       this.currentUserData = this.activateRoute.snapshot.queryParams;
       this.getAllMessages(this.currentUserData.uid);
