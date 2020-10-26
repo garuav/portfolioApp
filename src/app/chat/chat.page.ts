@@ -72,7 +72,7 @@ export class ChatPage implements OnInit {
   sendChatMessage() {
     if (this.chatText !== '' && this.chatText.length > 0) {
       const token = localStorage.getItem('token');
-      console.log('this.chatText = ', this.chatText);
+      // console.log('this.chatText = ', this.chatText);
       const param = {
         user_token: this.currentUserData.registration_token,
         sender: 'admin',
