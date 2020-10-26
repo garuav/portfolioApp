@@ -21,9 +21,9 @@
           <div class="user-count">
             <h5>Anonymous Users</h5> <h5>{{dashboardData?.users?.AnonymousUsers || 0}}</h5>
           </div>
-          <div class="user-count">
+          <!-- <div class="user-count">
             <h5>Users Visits</h5> <h5>{{dashboardData?.users?.UsersVisits || 0}}</h5>
-          </div>
+          </div> -->
           <div class="user-count" (click)="gotoPage('contacted')">
             <h5 style="text-decoration: underline;">Contacted Users</h5> <h5 style="text-decoration: underline;" >{{dashboardData?.users?.ContactedUsers || 0}}</h5>
           </div>
