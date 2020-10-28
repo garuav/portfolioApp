@@ -80,7 +80,7 @@ export class ChatPage implements OnInit {
         dateTime: new Date()
       };
       this.commonService.sendMessage(token, param).subscribe(res => {
-        console.log('response from send Message = ', res );
+        // console.log('response from send Message = ', res );
         const obj = {
           sender: 'admin',
           text: this.chatText,
